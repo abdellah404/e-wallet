@@ -1,4 +1,4 @@
-import finduserbymail from "../Model/database.js";
+import {finduserbymail} from "../Model/database.js";
 
 const email = document.getElementById("mail");
 const password = document.getElementById("password");
@@ -11,7 +11,7 @@ function handleSubmit() {
     if (!email.value || !password.value) {
         alert("bad credentials");
         return;
-    }
+    }   
 
     setTimeout(() => {
         const user = finduserbymail(email.value, password.value);
