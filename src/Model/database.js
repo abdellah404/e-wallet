@@ -10,7 +10,7 @@ const database = {
         balance: 10000,
         currency: "MAD",
         cards: [
-          { numcards: "124847", type: "visa", balance: 14712, expiry: "2027-08-14", vcc: "147" },
+          { numcards: "12484755", type: "visa", balance: 14712, expiry: "2027-08-14", vcc: "147" },
           { numcards: "124478", type: "mastercard", balance: 1470, expiry: "2028-08-14", vcc: "257" }
         ],
         transactions: [
@@ -34,8 +34,8 @@ const database = {
         balance: 2000,
         currency: "MAD",
         cards: [
-          { numcards: "224847", type: "visa", balance: 14712, expiry: "2027-08-14", vcc: "147" },
-          { numcards: "224478", type: "mastercard", balance: 1470, expiry: "2028-08-14", vcc: "257" }
+          { numcards: "22484769569", type: "visa", balance: 14712, expiry: "2027-08-14", vcc: "147" },
+          { numcards: "2244755888", type: "mastercard", balance: 1470, expiry: "2028-08-14", vcc: "257" }
         ],
         transactions: [
           { id: "1", type: "credit", amount: 140, date: "2025-08-14", from: "Ali", to: "12347" },
