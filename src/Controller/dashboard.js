@@ -169,25 +169,17 @@ const debit= {
 
 // **************************************transfer***************************************************//
 
-function transfer(expediteur,numcompte,amount){
-  
-   checkUser(numcompte)//p0
-     .then( ()=> //p1
-      checkSolde(expediteur, amount)) //p2
-        .then(()=> //p3
-           updateSolde(expediteur, finduserbyaccount(numcompte), amount))//p4
-            .then(()=> //p5
-              addtransactions(expediteur, finduserbyaccount(numcompte), amount)) //p6
-                .then((message)=>{ //
-                    console.log(message);
-                    renderDashboard();
-                  }).catch((error)=>{
-                    console.log(error);
-                  })
-                  closeTransfer();
-
-  
-} 
+async function transfer(expediteur, numcompte, amount) {
+  try {
+    const destinataire = await checkUser(numcompte);
+    await checkSolde(expediteur, amount);
+    await updateSolde(expediteur, destinataire, amount);
+    await addtransactions(expediteur, destinataire, amount);
+  } catch (error) {
+    console.log(error);
+    alert(error);
+  }
+}
 
 
 function handleTransfer(e) {
@@ -199,6 +191,8 @@ function handleTransfer(e) {
   const amount = Number(document.getElementById("amount").value);
 
 transfer(user, beneficiaryAccount, amount);
+    closeTransfer();
+
 } 
 
 
@@ -297,27 +291,26 @@ const checkCard = (cardNumber) => new Promise((resolve, reject) => {
 
 
 
-  function recharge(amount) {
-   checkAmount(amount)
-      .then(() => {//add transaction
-        return addRechargeTransaction(amount);
-
-      }).then(() => {
-        return checkCard(cardRecharge.value);
-      })
-      .then((message) => {
-        console.log(message);
-        renderDashboard();
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+  async function recharge(amount) {
+  
+  try {
+    await checkAmount(amount);
+    await checkCard(cardRecharge.value);
+    await addRechargeTransaction(amount);
+  
+  } catch (error) {
+    console.log(error);
+    alert(error);
+  }
+     
   }
 
   submitRechargeBtn.addEventListener("click", (e) => {
     e.preventDefault();
     const amount = Number(amountRecharge.value);
     recharge(amount);
+    renderDashboard();
+
     closeRecharge();
 
   });
